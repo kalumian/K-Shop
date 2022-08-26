@@ -17,12 +17,10 @@ function Products() {
     try {
       //
       console.log(categoryID);
-      
+
       setStatefetch(true);
       const fetchData = async () => {
-        const data = categoryID
-          ? await GetProducts(categoryID)
-          : await GetProducts();
+        const data =  await GetProducts(categoryID) 
         setProducts(data);
         setStatefetch(false);
       };

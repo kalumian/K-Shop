@@ -48,7 +48,7 @@ function Categories({
           </>
         ) : (
           <>
-            <option>{"Select Category"}</option>;
+            <option>{"all"}</option>;
             {categories.map((i) => {
               return <option value={i.id}>{i.name}</option>;
             })}
@@ -60,7 +60,7 @@ function Categories({
       </button>
       <button
         className="fillter"
-        onClick={() => (select ? setCategoryID(select) : "")}
+        onClick={() => (select ? setCategoryID(select) : setCategoryID(0))}
       >
         Fillter
       </button>
