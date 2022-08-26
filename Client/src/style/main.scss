@@ -1,0 +1,8 @@
+//
+@use "./var";
+@use "./_general.scss";
+
+// Import Pages Of styles
+@use "../component/pages/K_shop/_style.scss" as shop;
+@use "../component/pages/ToDoListApp/_style.scss" as to_do_list_app
+
