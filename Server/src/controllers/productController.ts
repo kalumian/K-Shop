@@ -1,9 +1,9 @@
 import { Controller } from "../models/interfaces";
-import Product from "../models/product";
+import Product, { ProductSchema } from "../models/product";
 
 export const GetProductContoller: Controller = async (req, res, next) => {
   // Get Query
-  let query = req.query.category;
+  let { category, search } = req.query;
 
   // Get All Categories
   let categories: any = await Product.getAllCategories();
@@ -11,12 +11,25 @@ export const GetProductContoller: Controller = async (req, res, next) => {
     return i.id;
   });
   try {
-    if (query && categories.includes(Number(query))) {
-      const products = await Product.getProductsByCategories(Number(query));
-      res.send(products);
+    if (category && categories.includes(Number(category))) {
+      const products: any = await Product.getProductsByCategories(
+        Number(category)
+      );
+
+      res.send(
+        products.filter((i: ProductSchema) => {
+          return new RegExp(String(search).trimEnd(), "gi").test(i.name);
+        })
+      );
     } else {
-      const products = await Product.getProducts();
-      res.send(products);
+      const products: any = await Product.getProducts();
+      search
+        ? res.send(
+            products.filter((i: ProductSchema) => {
+              return new RegExp(String(search).trimEnd(), "gi").test(i.name);
+            })
+          )
+        : res.send(products);
     }
   } catch (error) {
     res.send({ error });
@@ -26,6 +39,17 @@ export const GetProductContoller: Controller = async (req, res, next) => {
 export const GetCategoriesContoller: Controller = async (req, res, next) => {
   try {
     let categories: any = await Product.getAllCategories();
+    res.send(categories);
+  } catch (error) {
+    res.send({ error });
+    next();
+  }
+};
+
+export const GetProductByIdController: Controller = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    let categories: any = await Product.GetProductById(Number(id));
     res.send(categories);
   } catch (error) {
     res.send({ error });

@@ -4,8 +4,7 @@ import Products from "../../Elements/K_shop/Products";
 const K_shop = (): JSX.Element => {
   return (
     <main className="shop">
-      <Header />
-    <div className="space"></div>
+      <div className="space"></div>
       <Products />
     </main>
   );

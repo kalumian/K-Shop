@@ -1,6 +1,6 @@
 import { db } from "../db";
 import { Categories } from "./interfaces";
-interface ProductSchema {
+export interface ProductSchema {
   name: string;
   image: string;
   price: number;
@@ -29,8 +29,7 @@ export default class Product implements ProductSchema {
 
   // Methods
   static async getProducts() {
-    const order =
-      "SELECT `products`.`id`,`products`.`name`,`products`.`description`,`products`.`price`,`products`.`category`,`products`.`image` FROM `k-shop`.`products`;";
+    const order =`SELECT * FROM \`k-shop\`.products`
     const [result] = await db.execute(order);
     return result;
   }
@@ -40,7 +39,12 @@ export default class Product implements ProductSchema {
     return result;
   }
   static async getAllCategories() {
-    const order:string = `SELECT * FROM \`k-shop\`.categories;`;
+    const order: string = `SELECT * FROM \`k-shop\`.categories;`;
+    const [result] = await db.execute(order);
+    return result;
+  }
+  static async GetProductById(id: number) {
+    const order = `SELECT * FROM \`k-shop\`.products where id = ${id}`;
     const [result] = await db.execute(order);
     return result;
   }

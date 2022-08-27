@@ -11,16 +11,15 @@ function Products() {
   const [statefetch, setStatefetch] = useState<boolean>(true);
   const [stateCategories, setStateCategories] = useState<boolean>(false);
   const [categoryID, setCategoryID] = useState<number>();
+  const [search, setSeacrh] = useState<string>("");
 
   // ----------------
   useEffect(() => {
     try {
       //
-      console.log(categoryID);
-
       setStatefetch(true);
       const fetchData = async () => {
-        const data =  await GetProducts(categoryID) 
+        const data = await GetProducts(categoryID, search);
         setProducts(data);
         setStatefetch(false);
       };
@@ -29,11 +28,22 @@ function Products() {
     } catch (error) {
       console.log(error);
     }
-  }, [categoryID]);
+  }, [categoryID, search]);
   // ----------------
 
   return (
     <section className="products container">
+      <div>
+        <input
+          type="search"
+          className="search"
+          value={search}
+          placeholder="search"
+          onChange={(i) => {
+            setSeacrh(i.target.value);
+          }}
+        />
+      </div>
       <div className="buttons">
         <Categories
           setCategoryID={setCategoryID}
@@ -42,9 +52,7 @@ function Products() {
           setStateCategories={setStateCategories}
         />
       </div>
-      {/* <div>
-        <input type="search" className="search" />
-      </div> */}
+
       {!statefetch ? (
         <article className="cards">
           {products.map(({ name, description, category, id, image, price }) => {

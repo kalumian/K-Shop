@@ -13,10 +13,10 @@ const Card: React.FC<Product> = ({
   return (
     <div className="card" key={`${id}`}>
       <div className="image">
-        <img src={`${image}`} alt="product-image" />
+        <Link to={`/${id}`}><img src={`${image}`} alt="product-image" /></Link>
       </div>
       <h2 className="title">
-        <Link to="/">{`${name}`}</Link>
+        <Link to={`/${id}`}>{`${name}`}</Link>
       </h2>
       <p className="description">{`${description}`}</p>
       <p className="price">{`${price}`}$</p>

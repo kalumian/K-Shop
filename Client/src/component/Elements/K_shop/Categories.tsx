@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FaFilter } from "react-icons/fa";
+import { BiCategoryAlt } from "react-icons/bi";
 import { GetCategories } from "../../../Functions/Fetches_shop";
 import { Categoriess } from "../../../interfaces/shop";
 
@@ -49,20 +51,22 @@ function Categories({
         ) : (
           <>
             <option>{"all"}</option>;
-            {categories.map((i) => {
+            {
+            categories.map((i: Categoriess) => {
               return <option value={i.id}>{i.name}</option>;
-            })}
+            })
+            }
           </>
         )}
       </select>
       <button onClick={() => setStateCategories(!stateCategories)}>
-        Categories
+        <BiCategoryAlt/>  Categories
       </button>
       <button
         className="fillter"
         onClick={() => (select ? setCategoryID(select) : setCategoryID(0))}
       >
-        Fillter
+        <FaFilter/>  Fillter
       </button>
     </>
   );

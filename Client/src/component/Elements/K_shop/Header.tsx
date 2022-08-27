@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { AiOutlineAppstoreAdd, AiOutlineHome , AiOutlineShoppingCart } from "react-icons/ai";
+import { IoIosPaperPlane } from "react-icons/io";
+import { CgLogIn } from "react-icons/cg";
+import { ImExit } from "react-icons/im";
+import { FaBoxOpen } from "react-icons/fa";
 import { Link } from "react-router-dom";
 function Header() {
   const [stateNavbar, setStateNavbar] = useState<boolean>(false);
@@ -19,25 +24,25 @@ function Header() {
         <nav className={`navbar ${stateNavbar ? "active" : ""}`}>
           <ul>
             <Link to={"/"}>
-              <li>Home</li>
+              <li><AiOutlineHome/>Home</li>
             </Link>
             <Link to={"/"}>
-              <li>Cart</li>
+              <li><AiOutlineShoppingCart/>Cart</li>
             </Link>
             <Link to={"/"}>
-              <li>Orders</li>
+              <li><IoIosPaperPlane/>Orders</li>
             </Link>
             <Link to={"/"}>
-              <li>Login</li>
+              <li><CgLogIn/>Login</li>
             </Link>
             <Link to={"/"}>
-              <li>Add Product</li>
+              <li><AiOutlineAppstoreAdd/>Add Product</li>
             </Link>
             <Link to={"/"}>
-              <li>Manage Orders</li>
+              <li><FaBoxOpen/>Manage Orders</li>
             </Link>
             <Link to={"/"}>
-              <li>Exit</li>
+              <li><ImExit/>Exit</li>
             </Link>
           </ul>
         </nav>
