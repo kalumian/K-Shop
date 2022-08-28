@@ -5,6 +5,8 @@ export const GetProductContoller: Controller = async (req, res, next) => {
   // Get Query
   let { category, search } = req.query;
 
+  search = String(search).replace(/\*/gi, "");
+
   // Get All Categories
   let categories: any = await Product.getAllCategories();
   categories = categories.map((i: { id: number }) => {

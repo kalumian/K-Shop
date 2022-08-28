@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { GetProductById } from "../../../Functions/Fetches_shop";
 import { Product } from "../../../interfaces/shop";
-import Loader from "./Loader";
+import Loader from "../../Elements/Loader";
 
 function Details() {
   const [product, setProduct] = useState<Product>();
   const [fetchState, setFetchState] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>();
   let { pathname } = useLocation();
-  let id = Number(pathname.split("/")[1]);
+  let id = Number(pathname.split("/")[2]);
 
   useEffect(() => {
     setFetchState(false);

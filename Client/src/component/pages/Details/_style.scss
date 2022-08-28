@@ -1,0 +1,99 @@
+// Imports
+@use "../../../style/_var.scss" as var;
+
+// Styling
+
+.details {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+
+  & .line {
+    height: 400px;
+    width: 1px;
+    background: var.$third-color;
+    display: block;
+  }
+  & .image {
+    background-color: white;
+    border: 2px solid var.$third-color;
+    height: 400px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    overflow:hidden;
+    & img {
+      width: 100%;
+    }
+  }
+  & .detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+    justify-content: center;
+    background-color: var.$main-color;
+    border-bottom: 2px var.$third-color solid;
+    & h2 {
+      margin: 10px 0 8px 0;
+      color: var.$third-color;
+    }
+    & a {
+      text-decoration: none;
+      color: var.$third-color;
+      font-size: 27px;
+    }
+    & p.price {
+      font-size: 23px;
+      font-weight: 600;
+      margin: 15px 0;
+      color: var.$third-color;
+    }
+    & p.description {
+      padding: 0px 7px;
+      line-height: 23px;
+      color: var.$second-color;
+      margin: 15px 0 0 0;
+    }
+    & input {
+      font-size: 23px;
+      padding: 4px 20px;
+      border: 2px solid #7f5283;
+      width: 135px;
+      margin-bottom: 17px;
+      color: var.$second-color;
+      transition: 0.3s;
+      &:focus {
+        outline: 1px solid var.$forth-color;
+      }
+    }
+    & .add {
+      border: none;
+      text-align: center;
+      padding: 14px 34px;
+      font-size: 13px;
+      color: var.$main-color;
+      text-transform: uppercase;
+      background: var.$third-color;
+      cursor: pointer;
+      &:hover {
+        transition: 0.4s;
+        border: var.$second-color 1px solid;
+        color: #3d3c42;
+        background-color: #fefbf6;
+      }
+    }
+  }
+
+  @media (max-width: var.$small-witdh) {
+    align-items: center;
+    flex-direction: column;
+    & .line {
+      display: none;
+    }
+    & .image{
+      margin-bottom: 20px;
+    }
+  }
+}

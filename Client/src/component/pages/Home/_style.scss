@@ -1,0 +1,145 @@
+// Imports
+@use "../../../style/_var.scss" as var;
+
+// Styling
+.shop {
+  background-color: rgb(248, 253, 253);
+  font-family: var.$main-font;
+  font-family: "Cairo", sans-serif;
+  & .space {
+    margin: 150px 0 0 0;
+  }
+  & .products {
+    min-height: 500px;
+    & .buttons {
+      text-align: start;
+      margin: 20px 0;
+      & select {
+        direction: rtl;
+        padding: 0;
+        height: 41px;
+        width: 0px;
+        margin-right: 0;
+        border: 0px solid var.$third-color;
+        transition: 0.4s;
+        text-transform: capitalize;
+        &.active {
+          padding: 0px 12px;
+          width: 0px;
+          margin-right: 10px;
+          border: 2px solid var.$third-color;
+          width: 50%;
+        }
+        & option {
+          text-transform: capitalize;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      & button {
+        cursor: pointer;
+        color: aliceblue;
+        padding: 12px 30px;
+        border: 1px solid;
+        background-color: darken($color: var.$forth-color, $amount: 7);
+        &.fillter {
+          margin-left: 10px;
+          background-color: var.$third-color;
+        }
+        &:hover {
+          transition: 0.4s;
+          border: var.$second-color 1px solid;
+          color: var.$second-color;
+          background-color: #fefbf6;
+        }
+      }
+    }
+    & .search {
+      padding: 0px 12px;
+      height: 41px;
+      width: 50%;
+      border: 2px solid var.$third-color;
+      transition: 0.4s;
+      text-transform: capitalize;
+      margin-bottom: 15px;
+    }
+
+    & .cards {
+      justify-content: space-between;
+      display: grid;
+      gap: 40px 0;
+      grid-template-columns: repeat(auto-fill, 300px);
+
+      @media (max-width: var.$small-witdh) {
+        justify-content: center;
+      }
+      // align-items: ;
+      & .card {
+        border: 2px solid whitesmoke;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        background-color: var.$main-color;
+        border-bottom: 2px var.$third-color solid;
+        & h2 {
+          margin: 10px 0 0 0;
+        }
+        & a {
+          text-decoration: none;
+          color: var.$third-color;
+          font-size: 27px;
+        }
+        & p.price {
+          font-size: 23px;
+          font-weight: 600;
+          margin: 15px 0;
+          color: var.$third-color;
+        }
+        & p.description {
+          padding: 0px 7px;
+          line-height: 23px;
+          color: var.$second-color;
+          margin: 15px 0 0 0;
+        }
+        & .image {
+          width: 100%;
+          border: 2px solid whitesmoke;
+          & img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        & .add {
+          border: none;
+          text-align: center;
+          padding: 14px 34px;
+          font-size: 13px;
+          color: var.$main-color;
+          text-transform: uppercase;
+          background: var.$third-color;
+          cursor: pointer;
+          &:hover {
+            transition: 0.4s;
+            border: var.$second-color 1px solid;
+            color: var.$second-color;
+            background-color: #fefbf6;
+          }
+        }
+        & input {
+          font-size: 23px;
+          padding: 4px 20px;
+          border: 2px solid var.$third-color;
+          width: 135px;
+          margin-bottom: 17px;
+          color: var.$second-color;
+          transition: 0.3s;
+          &:focus {
+            outline: 1px solid var.$forth-color;
+          }
+        }
+      }
+    }
+  }
+}

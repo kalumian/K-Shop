@@ -1,4 +1,5 @@
-@use "./var" as var;
+@use "./_var.scss" as var;
+
 body {
   margin: 0;
   padding: 0;
@@ -57,5 +58,136 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.lds-ring div {
+  border-color: var.$forth-color transparent transparent transparent;
+}
+
+.footer {
+  text-transform: uppercase;
+  text-align: center;
+  margin: 30px 0 0 0;
+  height: 80px;
+  border-top: 1px solid var.$third-color;
+  background: #fefbf6;
+  padding-top: 15px;
+  font-size: 18px;
+  color: var.$third-color;
+  & .icons {
+    margin-top: 14px;
+    & svg {
+      margin: 0px 5px;
+      color: var.$third-color;
+      &:hover {
+        color: lighten($color: var.$third-color, $amount: 4);
+      }
+    }
+  }
+}
+
+.header.header {
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 3;
+  position: relative;
+  & .container {
+    background-color: var.$main-color;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &::before {
+      content: "";
+      width: 100%;
+      position: absolute;
+      height: 2px;
+      background-color: var.$second-color;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  & .logo {
+    font-family: var.$second-font;
+    color: var.$second-color;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  & .navbar-button {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    width: 35px;
+    height: 29px;
+    align-items: end;
+    margin: 0;
+    background-color: transparent;
+    padding: 0;
+    justify-content: space-around;
+    cursor: pointer;
+    & span {
+      background: var.$second-color;
+      display: block;
+      width: 30px;
+      height: 2px;
+      transition: 0.3s;
+      &:nth-child(2) {
+        width: 20px;
+      }
+    }
+    &:hover {
+      & span:nth-child(2) {
+        width: 30px;
+      }
+    }
+  }
+  & .navbar {
+    position: absolute;
+    font-family: var.$main-font;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+    z-index: -1;
+    transition: 0.5s;
+    & ul {
+      display: flex;
+      justify-content: space-around;
+      background-color: var.$forth-color;
+      list-style: none;
+      flex-wrap: wrap;
+      position: relative;
+      & a {
+        text-decoration: none;
+        color: darken($color: var.$second-color, $amount: 5);
+        transition: 0.2s;
+        &:hover {
+          color: lighten($color: var.$second-color, $amount: 15);
+        }
+      }
+      & li {
+        padding: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        & svg {
+          margin-right: 5px;
+        }
+      }
+    }
+    &.active {
+      bottom: -105px;
+      margin: -15px 0;
+    }
+    &::before {
+      content: "";
+      border-width: 14px;
+      border-style: solid;
+      border-color: transparent transparent var.$forth-color transparent;
+      position: absolute;
+      right: 15px;
+      top: -12px;
+    }
   }
 }

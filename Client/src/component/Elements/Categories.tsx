@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { BiCategoryAlt } from "react-icons/bi";
-import { GetCategories } from "../../../Functions/Fetches_shop";
-import { Categoriess } from "../../../interfaces/shop";
+import { GetCategories } from "../../Functions/Fetches_shop";
+import { Categoriess } from "../../interfaces/shop";
 
 function Categories({
   stateCategories,

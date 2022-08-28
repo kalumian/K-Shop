@@ -10,7 +10,7 @@ function Header() {
   return (
     <header className="header">
       <div className="container">
-        <div className="logo">K-shop</div>
+        <Link to="/" style={{textDecoration:"none"}}><div className="logo">K-shop</div></Link>
         <button
           className="navbar-button"
           onClick={() => {
@@ -32,7 +32,7 @@ function Header() {
             <Link to={"/"}>
               <li><IoIosPaperPlane/>Orders</li>
             </Link>
-            <Link to={"/"}>
+            <Link to={"/login"}>
               <li><CgLogIn/>Login</li>
             </Link>
             <Link to={"/"}>

@@ -1,0 +1,17 @@
+@use "../../../style/_var.scss" as var;
+
+.not-found-page {
+  a , span {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: var.$third-color;
+    transition: 0.3s;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      font-size: 35px;
+      color: lighten($color: var.$third-color, $amount: 10);
+    }
+  }
+}

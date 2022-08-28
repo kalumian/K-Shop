@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Product } from "../../../interfaces/shop";
+import { Product } from "../../interfaces/shop";
 
 const Card: React.FC<Product> = ({
   id,
@@ -13,10 +13,10 @@ const Card: React.FC<Product> = ({
   return (
     <div className="card" key={`${id}`}>
       <div className="image">
-        <Link to={`/${id}`}><img src={`${image}`} alt="product-image" /></Link>
+        <Link to={`/product/${id}`}><img src={`${image}`} alt="product-image" /></Link>
       </div>
       <h2 className="title">
-        <Link to={`/${id}`}>{`${name}`}</Link>
+        <Link to={`/product/${id}`}>{`${name}`}</Link>
       </h2>
       <p className="description">{`${description}`}</p>
       <p className="price">{`${price}`}$</p>

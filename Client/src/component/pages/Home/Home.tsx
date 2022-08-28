@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
-function Home(): JSX.Element {
+import Header from "../../Elements/Header";
+import Products from "../../Elements/Products";
+// import "./style.scss"
+const Home = (): JSX.Element => {
   return (
-    <div>
-      <div>
-        <Link to="To-Do">To Do List App Project</Link>
-      </div>
-      <div>
-        <Link to="k-shop">K- Shop App Project</Link>
-      </div>
-    </div>
+    <main className="shop">
+      <div className="space"></div>
+      <Products />
+    </main>
   );
-}
+};
 
 export default Home;
