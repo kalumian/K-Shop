@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { GetProductById } from "../../../Functions/Fetches_shop";
-import { Product } from "../../../interfaces/shop";
+import { GetProductById } from "../../../Functions/ProductsFunctions";
+import { Product } from "../../../interfaces/productsInterface";
 import Loader from "../../Elements/Loader";
 
 function Details() {

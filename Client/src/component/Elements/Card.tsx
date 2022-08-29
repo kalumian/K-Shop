@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Product } from "../../interfaces/shop";
+import { Product } from "../../interfaces/productsInterface";
 
 const Card: React.FC<Product> = ({
   id,

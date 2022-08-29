@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { GetProducts } from "../../Functions/Fetches_shop";
-import { Product } from "../../interfaces/shop";
+import { GetProducts } from "../../Functions/ProductsFunctions";
+import { Product } from "../../interfaces/productsInterface";
 import Card from "./Card";
 import Categories from "./Categories";
 

@@ -1,4 +1,117 @@
 @use "../../../style/_var.scss" as var;
 
-// .sign-up {
-// }
+.sign-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  margin: 50px auto;
+  @media (max-width: var.$small-witdh) {
+    width: 350px;
+  }
+  & h2 {
+    font-size: 50px;
+    text-decoration: underline var.$forth-color;
+    font-family: "Lato", sans-serif;
+  }
+  & .box {
+    width: 100%;
+    border: 2px solid var.$forth-color;
+    padding: 3px;
+    text-align: center;
+    background: var.$main-color;
+    margin-bottom: 20px;
+  }
+  & .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px 0;
+  }
+  & label {
+    text-decoration: underline var.$forth-color;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    margin-bottom: 11px;
+    text-align: initial;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    color: var.$third-color;
+    & svg {
+      margin-left: 10px;
+    }
+  }
+  & input {
+    font-size: 20px;
+    margin: 0;
+    padding: 5px 10px;
+    width: 50%;
+    transition: 0.4s;
+    border: solid 1px #222831e6;
+    box-shadow: 0px -1px 5px 0px var.$forth-color;
+
+    
+    &.submit {
+      width: 170px;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      background: var.$third-color;
+      color: var.$main-color;
+      transition: 0.4s;
+      &:hover {
+        background-color: var.$main-color;
+        color: var.$third-color;
+      }
+    }
+    &:focus {
+      box-shadow: 0px -1px 5px 0px rgb(0 173 181 / 46%);
+      outline: 1px solid #222831e6;
+    }
+    &:hover {
+      box-shadow: 0px -1px 20px 0px rgb(0 173 181 / 46%);
+    }
+  }
+  & textarea {
+    font-size: 20px;
+    margin: 0;
+    transition: 0.4s;
+    border: solid 1px #222831e6;
+    box-shadow: 0px -1px 5px 0px lighten;
+    columns: 0;
+    &:focus {
+      outline: 1px solid var.$forth-color;
+      font-size: 20px;
+    }
+    &:hover {
+      box-shadow: 0px -1px 20px 0px lighten($color: var.$forth-color, $amount:
+            10);
+    }
+  }
+  & .errors {
+    margin: 20px 0;
+    .error {
+      margin: 7px 0;
+      text-align: start;
+      padding: 0 0px 0px 20px;
+      color: red;
+      text-transform: capitalize;
+    }
+  }
+  & .link a {
+    text-decoration: underline var.$forth-color;
+    font-size: 16px;
+    color: var.$third-color;
+    font-weight: 600;
+    margin-bottom: 13px;
+    display: block;
+    text-transform: capitalize;
+    transition: 0.3s;
+    &:hover {
+      color: var.$third-color;
+    }
+  }
+}

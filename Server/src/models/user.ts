@@ -8,7 +8,7 @@ const hashPassword = (password: string, salt: string = "secret-kalumian") => {
 
 export interface UserSchema {
   username: string;
-  adress: JSON;
+  adress: string;
   password: string;
   salt?: string | undefined;
   email: string;
@@ -16,14 +16,14 @@ export interface UserSchema {
 }
 export default class User implements UserSchema {
   username: string;
-  adress: JSON;
+  adress: string;
   salt?: string | undefined;
   password: string;
   email: string;
   walt: number | undefined;
   constructor(
     username: string,
-    adress: JSON,
+    adress: string,
     password: string,
     salt: string | undefined,
     email: string,
@@ -56,7 +56,7 @@ export default class User implements UserSchema {
     VALUES
     (
     '${Props.username}',
-    '${JSON.stringify(Props.adress)}',
+    '${Props.adress}',
     '${Props.password}',
     '${Props.salt}',
     '${Props.email}',
