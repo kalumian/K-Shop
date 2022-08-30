@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../../interfaces/userInterface";
 import axios, { Axios } from "axios";
+import { VscDebugBreakpointLog } from "react-icons/vsc";
 function SignUp() {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rePassword, setRePassword] = useState<string>("");
   const [adress, setAdress] = useState<string>("");
+  const refUsername = useRef<HTMLInputElement>(null);
+  const refEmail = useRef<HTMLInputElement>(null);
+  const refPassword = useRef<HTMLInputElement>(null);
+  const refRePassword = useRef<HTMLInputElement>(null);
+  const refAdress = useRef<HTMLTextAreaElement>(null);
+  const refButton = useRef<HTMLInputElement>(null);
+
   const [error, setError] = useState<string[]>([]);
-  const [mesage, setMessage] = useState<string>("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const deletFields = () => {
     setAdress("");
     setEmail("");
@@ -20,36 +27,50 @@ function SignUp() {
   };
   const handelUser: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const user: User = {
-      username,
-      email,
-      password,
-      rePassword,
-      adress,
-    };
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/user/register",
-        user
-      );
-      if(response.status === 201)
-      {
-      setMessage("Account successfully created")
-      setError([])
-      deletFields()
-      navigate("/login")
+    if (!username) {
+      refUsername.current?.focus();
+    } else if (!email) {
+      refEmail.current?.focus();
+    } else if (!password) {
+      refPassword.current?.focus();
+    } else if (!rePassword) {
+      refRePassword.current?.focus();
+    } else if (!adress) {
+      refAdress.current?.focus();
     }
-    } catch (error: any) {
-      if(error.response){
-        setError([])
-        setError(error.response.data.errors);
-      }else{
-        setError([])
-        setError(["Network Error"])
+    if (email && username && password && rePassword && adress) {
+      const user: User = {
+        username,
+        email,
+        password,
+        rePassword,
+        adress,
+      };
+
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/user/register",
+          user
+        );
+        if (response.status === 201) {
+          setError([]);
+          deletFields();
+          navigate("/login");
+        }
+      } catch (error: any) {
+        if (error.response) {
+          setError([]);
+          setError(error.response.data.errors);
+        } else {
+          setError([]);
+          setError(["Network Error"]);
+        }
       }
     }
   };
+  useEffect(() => {
+    refUsername.current?.focus();
+  }, []);
   return (
     <>
       <main className="sign-up">
@@ -57,11 +78,16 @@ function SignUp() {
           <>
             <h2>SING UP</h2>
             <div className="box">
-              <form action="post" onSubmit={handelUser}>
+              <form action="post" autoComplete="off" onSubmit={handelUser}>
                 <div className="input">
                   <label htmlFor="username">username</label>
                   <input
+                    autoComplete="off"
+                    ref={refUsername}
                     value={username}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" ? refEmail.current?.focus() : "";
+                    }}
                     onChange={(e) => {
                       setUsername(e.target.value);
                     }}
@@ -73,6 +99,8 @@ function SignUp() {
                 <div className="input">
                   <label htmlFor="email">email</label>
                   <input
+                    autoComplete="off"
+                    ref={refEmail}
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -85,10 +113,13 @@ function SignUp() {
                 <div className="input">
                   <label htmlFor="password">password</label>
                   <input
+                    autoComplete="off"
+                    ref={refPassword}
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
+          
                     type="password"
                     name="password"
                     id="password"
@@ -97,6 +128,10 @@ function SignUp() {
                 <div className="input">
                   <label htmlFor="repassword">re-password</label>
                   <input
+                    autoComplete="off"
+                    ref={refRePassword}
+                    
+  
                     value={rePassword}
                     onChange={(e) => {
                       setRePassword(e.target.value);
@@ -109,6 +144,9 @@ function SignUp() {
                 <div className="input">
                   <label htmlFor="adress">adress</label>
                   <textarea
+                    ref={refAdress}
+                    
+        
                     value={adress}
                     onChange={(e) => {
                       setAdress(e.target.value);
@@ -120,6 +158,8 @@ function SignUp() {
                 </div>
                 <div className="input">
                   <input
+                    autoComplete="off"
+                    ref={refButton}
                     type="submit"
                     name="submit"
                     id="submit"
@@ -129,7 +169,7 @@ function SignUp() {
                 </div>
                 <div className="errors">
                   {error.map((i) => {
-                    return <div className={"error"}>{i}</div>;
+                    return <div className={"error"}>● {i}</div>;
                   })}
                 </div>
                 <div className="link">
