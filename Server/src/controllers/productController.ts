@@ -1,6 +1,8 @@
 import { Controller } from "../models/interfaces";
 import Product, { ProductSchema } from "../models/product";
-
+import { tokenDecode } from "../models/token";
+import User from "../models/user";
+const jtw = require("jsonwebtoken");
 export const GetProductContoller: Controller = async (req, res, next) => {
   // Get Query
   let { category, search } = req.query;
@@ -50,11 +52,24 @@ export const GetCategoriesContoller: Controller = async (req, res, next) => {
 
 export const GetProductByIdController: Controller = async (req, res, next) => {
   const { id } = req.params;
+  const token = tokenDecode(String(req.headers.authorization));
+
   try {
-    let categories: any = await Product.GetProductById(Number(id));
-    res.send(categories);
-  } catch (error) {
-    res.send({ error });
+    const user = await User.IsThereMail(token?.email);
+
+    if (user) {
+      jtw.verify(req.headers.authorization, user.salt);
+      let product: any = await Product.GetProductById(Number(id));
+      res.send(product);
+    } else {
+      res.status(404).send("Token is Wrong");
+    }
+  } catch (error: any) {
+    res.status(400).send({
+      name: error.name,
+      message: error.message,
+      expiredAt: error.expiredAt,
+    });
     next();
   }
 };

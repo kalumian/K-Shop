@@ -4,6 +4,7 @@ import { GetProducts } from "../../Functions/ProductsFunctions";
 import { Product } from "../../interfaces/productsInterface";
 import Card from "./Card";
 import Categories from "./Categories";
+import { CartContext } from "../../Stores/cartContext";
 
 function Products() {
   // ----------------
@@ -12,7 +13,6 @@ function Products() {
   const [stateCategories, setStateCategories] = useState<boolean>(false);
   const [categoryID, setCategoryID] = useState<number>();
   const [search, setSeacrh] = useState<string>("");
-
   // ----------------
   useEffect(() => {
     try {

@@ -1,0 +1,82 @@
+// Imports
+@use "../../../style/_var.scss" as var;
+
+.carts {
+  & article.cart {
+    justify-content: space-between;
+    box-shadow: 0 0 10px 0px #00000057;
+    display: flex;
+    padding: 12px 20px;
+    align-items: center;
+    margin: 15px 10px;
+    border: 2px solid whitesmoke;
+  }
+  & .image {
+    overflow: hidden;
+    box-shadow: 0 0 6px var.$forth-color;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & img {
+      width: 100%;
+    }
+  }
+  & .about {
+    & h3 {
+      margin: 0;
+      font-size: 33px;
+      color: var.$forth-color;
+      font-family: "Cairo";
+    }
+    & h4 {
+      margin: 0;
+      color: #999;
+    }
+  }
+  & .price {
+    text-shadow: 1px 1px var.$forth-color;
+    font-size: 38px;
+    color: var.$third-color;
+  }
+  & .control {
+    display: flex;
+    flex-direction: column;
+    & button {
+      width: 150px;
+      padding: 8px 0;
+      margin: 8px 0;
+      border: 2px solid var.$forth-color;
+      cursor: pointer;
+      font-size: 14px;
+      background: var.$main-color;
+      transition: 0.4s;
+      &:hover {
+        background-color: lighten($color: var.$main-color, $amount: 2);
+      }
+      cursor: pointer;
+      font-size: 14px;
+    }
+  }
+  & .title {
+    text-align: center;
+    font-size: 50px;
+    font-family: "Lato";
+    color: #00adb5;
+  }
+  & .buttons {
+    text-align: center;
+    button {
+      padding: 11px 40px;
+      margin: 8px 10px;
+      cursor: pointer;
+    }
+  }
+  & .statactic {
+    font-size: 18px;
+    padding: 12px;
+    font-family: "Lato";
+    text-transform: capitalize;
+  }
+}

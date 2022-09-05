@@ -1,9 +1,12 @@
 import axios from "axios";
+import authHeader from "./services/auth-header";
 
-export const GetProducts = async (id?:number,search?:string) => {  
+export const GetProducts = async (id?: number, search?: string) => {
   const products = await (
-    await axios.get(`http://localhost:3000/product/?category=${id}&search=${search}`)
-  ).data 
+    await axios.get(
+      `http://localhost:3000/product/?category=${id}&search=${search}`
+    )
+  ).data;
   return products;
 };
 export const GetCategories = async () => {
@@ -12,9 +15,14 @@ export const GetCategories = async () => {
   ).data;
   return products;
 };
-export const GetProductById = async (id:number) => {
+export const GetProductById = async (id: number) => {
   const products = await (
-    await axios.get(`http://localhost:3000/product/${id}`)
+    await axios({
+      method: "GET",
+      url: `http://localhost:3000/product/${id}`,
+      headers: authHeader(),
+    })
   ).data;
+  console.log(products);
   return products;
 };

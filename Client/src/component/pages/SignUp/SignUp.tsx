@@ -1,8 +1,10 @@
 import { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../../interfaces/userInterface";
-import axios, { Axios } from "axios";
+import axios, { Axios, AxiosResponse } from "axios";
 import { VscDebugBreakpointLog } from "react-icons/vsc";
+import Loader from "../../Elements/Loader";
+import AuthService from "../../../Functions/services/auth.service";
 function SignUp() {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -15,6 +17,7 @@ function SignUp() {
   const refRePassword = useRef<HTMLInputElement>(null);
   const refAdress = useRef<HTMLTextAreaElement>(null);
   const refButton = useRef<HTMLInputElement>(null);
+  const [fetchState, setFetchState] = useState<boolean>(true);
 
   const [error, setError] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -48,20 +51,22 @@ function SignUp() {
       };
 
       try {
-        const response = await axios.post(
-          "http://localhost:3000/user/register",
-          user
-        );
+        setFetchState(false);
+        const response = await AuthService.register(user);
         if (response.status === 201) {
           setError([]);
           deletFields();
           navigate("/login");
         }
+        setFetchState(true);
       } catch (error: any) {
         if (error.response) {
+          setFetchState(true);
           setError([]);
           setError(error.response.data.errors);
+          console.log(error);
         } else {
+          setFetchState(true);
           setError([]);
           setError(["Network Error"]);
         }
@@ -74,7 +79,7 @@ function SignUp() {
   return (
     <>
       <main className="sign-up">
-        {true ? (
+        {fetchState ? (
           <>
             <h2>SING UP</h2>
             <div className="box">
@@ -119,7 +124,6 @@ function SignUp() {
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
-          
                     type="password"
                     name="password"
                     id="password"
@@ -130,8 +134,6 @@ function SignUp() {
                   <input
                     autoComplete="off"
                     ref={refRePassword}
-                    
-  
                     value={rePassword}
                     onChange={(e) => {
                       setRePassword(e.target.value);
@@ -145,8 +147,6 @@ function SignUp() {
                   <label htmlFor="adress">adress</label>
                   <textarea
                     ref={refAdress}
-                    
-        
                     value={adress}
                     onChange={(e) => {
                       setAdress(e.target.value);
@@ -168,7 +168,7 @@ function SignUp() {
                   />
                 </div>
                 <div className="errors">
-                  {error.map((i) => {
+                  {error?.map((i) => {
                     return <div className={"error"}>● {i}</div>;
                   })}
                 </div>
@@ -179,7 +179,7 @@ function SignUp() {
             </div>
           </>
         ) : (
-          <></>
+          <Loader />
         )}
       </main>
     </>

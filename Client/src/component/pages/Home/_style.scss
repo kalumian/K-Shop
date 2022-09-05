@@ -127,6 +127,15 @@
             background-color: #fefbf6;
           }
         }
+        & .hidden {
+          background-color: lighten($color: var.$third-color, $amount: 15);
+          cursor: no-drop;
+          &:hover {
+            border: none;
+            color: var.$main-color;
+            background-color: lighten($color: var.$third-color, $amount: 15);
+          }
+        }
         & input {
           font-size: 23px;
           padding: 4px 20px;

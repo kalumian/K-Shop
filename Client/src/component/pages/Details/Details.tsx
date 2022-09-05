@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { GetProductById } from "../../../Functions/ProductsFunctions";
+import AuthService from "../../../Functions/services/auth.service";
 import { Product } from "../../../interfaces/productsInterface";
 import Loader from "../../Elements/Loader";
+import To_back_Page from "../../Elements/To_back_Page";
 
 function Details() {
   const [product, setProduct] = useState<Product>();
@@ -14,13 +16,18 @@ function Details() {
   useEffect(() => {
     setFetchState(false);
     if (id)
-      GetProductById(id).then(([item]) => {
-        setProduct(item);
-        setFetchState(true);
-      });
+      GetProductById(id)
+        .then(([item]) => {
+          setProduct(item);
+          setFetchState(true);
+        })
+        .catch((err) => {
+          AuthService.tokenVerify(err);
+        });
   }, []);
   return (
     <main className="shop">
+      <To_back_Page />
       <div className="space"></div>
       <section className="details container">
         {fetchState ? (

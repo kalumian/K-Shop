@@ -192,3 +192,14 @@ body {
     }
   }
 }
+
+.to-back-component span {
+  display: block;
+  text-align: end;
+  margin-top: 25px;
+  font-size: 30px;
+  svg {
+    cursor: pointer;
+    color: var.$third-color;
+  }
+}

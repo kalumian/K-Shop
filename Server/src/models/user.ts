@@ -38,11 +38,12 @@ export default class User implements UserSchema {
   }
 
   // Methods
-  static async GetEmails() {
-    const order = `SELECT email FROM \`k-shop\`.users `;
-    const [result]: any = await db.execute(order);
+  static async IsThereMail(email: string) {
+    const order = `SELECT email,salt FROM \`k-shop\`.users where email = "${email}"`;
+    const [[result]]: any = await db.execute(order);
     return result;
   }
+
   static async register(Props: User) {
     const order = `INSERT INTO \`k-shop\`.\`users\`
     (
@@ -65,5 +66,15 @@ export default class User implements UserSchema {
     `;
     const result = await db.execute(order);
     return result;
+  }
+  static async login(email: string, password: string) {
+    let order = `SELECT * FROM \`k-shop\`.users where email = "${email}";`;
+    const [[result], _] = await db.execute(order);
+
+    if (result.password === hashPassword(password, result.salt)) {
+      return result;
+    } else {
+      return false;
+    }
   }
 }

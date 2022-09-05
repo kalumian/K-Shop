@@ -1,8 +1,9 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 const cors = require("cors");
-import ProductRouters from "./routers/producRoute";
-import UserRouters from "./routers/usersRouter";
+import ProductRouters from "./routers/producRouters";
+import UserRouters from "./routers/usersRouters";
+import CartRouters from "./routers/cartRouters";
 import bodyParser from "body-parser";
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 // Routers
 app.use("/product", ProductRouters);
 app.use("/user", UserRouters);
+app.use("/cart", CartRouters);
 
 // Listen
 app.listen(port, () => {
